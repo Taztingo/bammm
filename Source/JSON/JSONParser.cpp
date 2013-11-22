@@ -31,7 +31,7 @@ namespace bammm
 	void JSONParser::addRoot(JSON & newNode)
 	{
 		cout << "adding root \n";
-		_rootMap.add(newNode.getName(), newNode);
+		_rootMap.add(newNode.getName(), &newNode);
 		cout << "root added \n";
 	}
 
@@ -40,12 +40,12 @@ namespace bammm
 		rootNode.addChild(newNode);
 	}
 
-	HashMap<JSON>* JSONParser::getMap()
+	HashMap<JSON*>* JSONParser::getMap()
 	{
 		return &_rootMap;
 	}
 
-	JSON JSONParser::getRootNode(string key)
+	JSON* JSONParser::getRootNode(string key)
 	{
 		return _rootMap.getValue(key);
 	}
@@ -91,7 +91,7 @@ namespace bammm
 					{
 						currentNode = new JSON("root");
 						addRoot(*currentNode);
-						cout << "root added \n";
+						cout << "addRoot function complete \n";
 						cout.flush();
 					}
 
@@ -114,8 +114,8 @@ namespace bammm
 					}
 					else
 					{
-						*currentNode = currentNode->getParent();
-						*parentNode = parentNode->getParent();
+						currentNode = currentNode->getParent();
+						parentNode = parentNode->getParent();
 
 						isKey = true;
 					}
@@ -143,8 +143,8 @@ namespace bammm
 					cout << "Parsing ] \n";
 					cout.flush();
 
-					*currentNode = currentNode->getParent();
-					*parentNode = parentNode->getParent();
+					currentNode = currentNode->getParent();
+					parentNode = parentNode->getParent();
 
 					isKey = true;
 
@@ -180,6 +180,8 @@ namespace bammm
 						current = (char) input.get();
 					}
 
+					cout << "Name : " << name << "\nValue: " << value << endl;
+
 					break;
 
 				case ':':
@@ -191,16 +193,21 @@ namespace bammm
 
 					value = "";
 
+					cout << "WHAT'S THE COUNT?!?!?! ---- " << current << endl;
+
 					/* check  what comes after colon so we may determine type */
 					current = (char) input.peek();
 					while (!input.eof() && current == ' ')
 					{
 						current = (char) input.get();
 					}
+					cout << "WHAT'S THE COUNT 2?!?!?! ---- " << current << endl;
 
 					/* Now that we know the value, we may confirm the type of the JSON Node and create it. */
 
 					parentNode = currentNode;
+
+					cout << name << endl;
 
 					if (current == '{')
 					{
@@ -223,13 +230,16 @@ namespace bammm
 					else if (current == '"')
 					{
 
-						current = input.get();
-						while (!input.eof() && current == ' ')
+						current = (char) input.get();
+						current = (char) input.get();
+						cout << "the goddamn character is  ------  " << current << endl;
+						while (!input.eof() && current != '"')
 						{
 							value += current;
 							current = (char) input.get();
 						}
 
+						cout << "the goddamn value is  ------  " << value << endl;
 						currentNode = new JSONPrimitive(name, value,
 								JSON_STRING);
 
@@ -239,7 +249,7 @@ namespace bammm
 					else if (current == 'f' || current == 't')
 					{
 
-						while (!input.eof() && current == ' ')
+						while (!input.eof() && current != ' ')
 						{
 							value += current;
 							current = (char) input.get();
@@ -269,7 +279,7 @@ namespace bammm
 					else if (isdigit(current))
 					{
 
-						while (!input.eof() && current == ' ')
+						while (!input.eof() && current != ' ')
 						{
 							value += current;
 							current = (char) input.get();
@@ -304,16 +314,28 @@ namespace bammm
 					}
 					else
 					{
-						cout << "Error parsing value. Invalid character found. \n";
+						cout
+								<< "Error parsing value. Invalid character found. \n";
 						return false;
 					}
 
+					cout << "setting parent" << endl;
 					currentNode->setParent(*parentNode);
 					cout << "parent set" << endl;
-					parentNode->addChild(*currentNode);
+
+					if (parentNode == NULL)
+					{
+						addRoot(*currentNode);
+					}
+					else
+					{
+						parentNode->addChild(*currentNode);
+					}
 
 					cout << "Added object to map \n";
 					cout.flush();
+
+					cout << "Name: " << currentNode->getName() << " Type: " << currentNode->getType() << " Value: " << value << endl;
 
 					break;
 
@@ -322,8 +344,8 @@ namespace bammm
 					cout.flush();
 
 					/* reset node to parent so next key/value may be added as a child to parent */
-					*currentNode = currentNode->getParent();
-					*parentNode = parentNode->getParent();
+					currentNode = currentNode->getParent();
+					parentNode = parentNode->getParent();
 
 					isKey = true;
 
@@ -335,156 +357,11 @@ namespace bammm
 		cout << "End of file reached \n";
 		cout.flush();
 
+		currentNode = NULL;
+		parentNode = NULL;
 		delete currentNode;
 		delete parentNode;
 
 		return true;
 	}
 }
-
-/*switch (current)
- {
-
- case '[':
- cout << "Parsing [" << "\n";
- currentNode->setType(JSON_ARRAY);
- isValue = false;
- isArray++;
- break;
- case '{':
- cout << "Parsing {" << "\n";
- isValue = false;
- if (currentNode == NULL)
- {
- cout << "here \n";
- currentNode = new JSON();
- addRoot(*currentNode);
- // JSON node is created - now we continue so we may parse the name and set values
- }
- else
- {
- //seg faulted before changes to this
- cout << "here2 \n";
- parentNode = currentNode;
- currentNode = new JSON();
- currentNode->setParent(*parentNode);
- parentNode->addChild(*currentNode);
- }
- cout << "Completed { \n";
- break;
- case '"':
-
- cout << "Parsing \"" << "\n";
- if (currentNode == NULL)
- {
- cout << "Error reading in JSON object" << endl;
- return false;
- }
-
- current = (char) input.get();
- name = "";
- value = "";
- while (!input.eof() && current != '"')
- {
- if (isValue == false)
- {
- name += current;
- }
- else
- {
- value += current;
- }
- current = (char) input.get();
- }
-
- if (isValue == false)
- {
- //the name of the first attribute is the name of the JSON node. Need to fix.
- currentNode->setName(name);
- }
- else
- {
- currentNode->setValue(value);
-
- if (value == "false" || value == "true")
- {
- currentNode->setType(JSON_BOOL);
- }
- else if (value == "")
- {
- currentNode->setType(JSON_NULL);
- }
- else if (isdigit(value[0]))
- {
- for (unsigned int i = 0; i < value.size(); i++)
- {
- if (value[i] == '.')
- {
- currentNode->setType(JSON_DOUBLE);
- }
- else
- {
- currentNode->setType(JSON_INT);
- }
- }
- }
- else
- {
- currentNode->setType(JSON_STRING);
- }
- }
- break;
- case ':':
- cout << "Parsing :" << "\n";
- isValue = true;
- break;
- case ',':
- cout << "Parsing ," << "\n";
- isValue = false;
-
- childNode = new JSON();
- cout << "Before getParent()\n";
- *currentNode = currentNode->getParent();
- cout << "Before addChild\n";
- currentNode->addChild(*childNode);
- cout << "Before setParent\n";
- childNode->setParent(*currentNode);
-
- currentNode = childNode;
- break;
- case ']':
- cout << "Parsing ]" << "\n";
- isArray--;
- break;
- case '}':
- cout << "Parsing }" << "\n";
- if (parentNode == NULL)
- {
- break;
- }
-
- currentNode = parentNode;
- *parentNode = currentNode->getParent();
- break;
- default:
- break;
- }
-
- continue;
- }
-
- if (isArray > 0)
- {
- cout
- << "Error: Not all brackets or braces are closed in the JSON file."
- << endl;
- return 1;
- }
-
- delete currentNode;
- delete parentNode;
- return true;
- }
- }
- */
-

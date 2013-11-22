@@ -36,10 +36,9 @@ namespace bammm
 	class JSONParser
 	{
 		private:
-			HashMap<JSON> _rootMap;
+			HashMap<JSON*> _rootMap;
 
 			/*
-			 *
 			 addRoot
 			 @Pre-Condition- Takes in a JSON node
 			 @Post-Condition- Adds the node as a root node
@@ -48,7 +47,6 @@ namespace bammm
 			void addRoot(JSON & newNode);
 
 			/*
-			 *
 			 addChild
 			 @Pre-Condition- Takes in a JSON  rootNode and a JSON childNode
 			 @Post-Condition- Adds the child to the specified rootNode
@@ -73,7 +71,7 @@ namespace bammm
 			 @Pre-Condition- No input
 			 @Post-Condition- Returns the entire map as a HashMap
 			 */
-			HashMap<JSON>* getMap();
+			HashMap<JSON*>* getMap();
 
 			/*
 
@@ -82,7 +80,12 @@ namespace bammm
 			 @Post-Condition- Returns the JSON node with name "key"
 			 */
 
-			JSON getRootNode(string key);
+			JSON* getRootNode(string key);
+
+			JSON & operator[](string key)
+			{
+				return *_rootMap.getValue(key);
+			}
 	};
 }
 
