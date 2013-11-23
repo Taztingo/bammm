@@ -9,7 +9,7 @@
 #define JSON_H_
 
 #include <string>
-#include "HashMap.h"
+#include "../Resources/HashMap.h"
 
 namespace bammm
 {

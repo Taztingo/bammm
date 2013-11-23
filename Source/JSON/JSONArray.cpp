@@ -60,10 +60,8 @@ namespace bammm
 					<< "Error: JSONPrimitive Object not initialized to a value or incorrect type :: JSON_NULL \n";
 			return *this;
 		}
-		else
-		{
-			return _children[rhs];
-		}
+
+		return _children[rhs];
 	}
 
 }

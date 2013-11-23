@@ -19,7 +19,7 @@
 #include <fstream>
 #include <string>
 
-#include "HashMap.h"
+#include "../Resources/HashMap.h"
 #include "JSON.h"
 #include "JSONPrimitive.h"
 
@@ -82,9 +82,9 @@ namespace bammm
 
 			JSON* getRootNode(string key);
 
-			JSON & operator[](string key)
+			JSON * operator[](const string key)
 			{
-				return *_rootMap.getValue(key);
+				return _rootMap.getValue(key);
 			}
 	};
 }

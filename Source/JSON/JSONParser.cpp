@@ -13,7 +13,7 @@
  */
 
 #include "JSONParser.h"
-#include "DynamicArray.h"
+#include "../Resources/DynamicArray.h"
 #include "JSON.h"
 #include "JSONArray.h"
 #include <stdlib.h>
