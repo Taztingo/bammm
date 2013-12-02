@@ -64,6 +64,8 @@ namespace bammm
 			bool getPath(Vector3D* actorPos, Vector3D* currentLoc,
 					Vector3D* directionOfPrevious, Stack<Vector3D*>* path);
 
+			bool isFog(int, int, int);
+
 		public:
 			Grid3D();
 			Grid3D(int width, int length, int height);
@@ -291,7 +293,7 @@ namespace bammm
 	Stack<Vector3D*>* Grid3D<T>::getPath(Actor* actor, string destination)
 	{
 		Vector3D* target = findInGrid(destination);
-		if (target == NULL)
+		if (target == NULL )
 		{
 			return new Stack<Vector3D*>();
 		}
@@ -468,10 +470,12 @@ namespace bammm
 	template<class T>
 	Vector3D* Grid3D<T>::findInGrid(string target)
 	{
-		for (unsigned int gridIndex = 0; gridIndex < _grid->getSize(); gridIndex++)
+		for (unsigned int gridIndex = 0; gridIndex < _grid->getSize();
+				gridIndex++)
 		{
 			DynamicArray<T>* cell = _grid->get(gridIndex);
-			for (unsigned int cellIndex = 0; cellIndex < cell->getSize(); cellIndex++)
+			for (unsigned int cellIndex = 0; cellIndex < cell->getSize();
+					cellIndex++)
 			{
 				T actor = cell->get(cellIndex);
 				if (actor->toString() == target)
@@ -480,7 +484,30 @@ namespace bammm
 				}
 			}
 		}
-		return NULL;
+		return NULL ;
+	}
+
+	template<class T>
+	bool Grid3D<T>::isFog(int x, int y, int z)
+	{
+		Vector3D* location = new Vector3D((float) x, (float) y, (float) z);
+		DynamicArray<DynamicArray<T>*>* radius = access(location, 2);
+		//int radius = 2;
+		//delete location;
+
+		for (unsigned int i = 0; i < radius->getSize(); ++i)
+		{
+			for (unsigned int j = 0; j < radius->get(i)->getSize(); ++j)
+			{
+				cout << i << " " << j << endl;
+				if (radius->get(i)->get(j)->getType() == "dwarf")
+				{
+					return false;
+				}
+			}
+		}
+
+		return true;
 	}
 
 	template<class T>
@@ -495,7 +522,11 @@ namespace bammm
 				DynamicArray<T>* atLocation;
 				atLocation = access(i, i2, 0);
 
-				if (atLocation->getSize() <= 0)
+				if (isFog(i, i2, 0) == true)
+				{
+					gridString = gridString + Color::colorText(". ", "grey");
+				}
+				else if (atLocation->getSize() <= 0)
 				{
 					gridString = gridString + Color::colorText(". ", "green");
 				}
@@ -507,6 +538,7 @@ namespace bammm
 					gridString = gridString + Color::colorText(symbol, color)
 							+ " ";
 				}
+
 			}
 			gridString = gridString + "\n";
 		}
@@ -532,7 +564,7 @@ namespace bammm
 		}
 
 		delete tiles;
-		return NULL;
+		return NULL ;
 	}
 
 	template<class T>
