@@ -42,6 +42,9 @@ namespace bammm
 	void CraftState::tick(float deltaTime)
 	{
 
+
+
+
 	}
 
 	void CraftState::switchState(string nextState)

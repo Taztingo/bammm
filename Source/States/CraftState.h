@@ -72,6 +72,8 @@ namespace bammm
 
 			void setAmount(int craftableAmount);
 
+			void craft();
+
 	};
 
 }
