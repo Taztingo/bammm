@@ -58,6 +58,13 @@ namespace bammm
 			 @Post-Condition- Returns a string representation of AiController
 			 */
 			virtual string toString();
+			
+			/**
+			 getActor
+			 @Pre-Condition- Takes nothing
+			 @Post-Condition- Returns the actor the AiController is using
+			 */
+			virtual Actor* getActor();
 	};
 }
 

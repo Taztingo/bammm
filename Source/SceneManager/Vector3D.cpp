@@ -88,7 +88,7 @@ namespace bammm
 
 	string Vector3D::toString()
 	{
-		return "";
+		return "(" + to_string(_x) + "," + to_string(_y) + "," + to_string(_z) + ")";
 	}
 
 	bool Vector3D::operator==(const Vector3D &vector)

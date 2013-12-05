@@ -37,16 +37,20 @@ namespace bammm
 		_defense = 2;
 		_symbol = "D";
 		_color = "white";
+		_level = 1;
+		_experience = 0;
+		_totalExperienceThisLevel = 1;
 	}
 
 	Actor::Actor(string name, string type, AllianceType alliance)
 	{
-		_collision = false;
 		_name = name;
 		_type = type;
 		_rotation = 0;
+
 		_velocity = new Vector3D();
 		_location = new Vector3D();
+		_collision = false;
 
 		_maximumHealth = 100;
 		_maximumStamina = 50;
@@ -57,6 +61,9 @@ namespace bammm
 		_attack = 4;
 		_defense = 2;
 		_alliance = alliance;
+		_level = 1;
+		_experience = 0;
+		_totalExperienceThisLevel = 1;
 	}
 
 	Actor::Actor(string type, string name, int health, int stamina, int attack,
@@ -68,6 +75,7 @@ namespace bammm
 		_rotation = 0;
 		_velocity = new Vector3D();
 		_location = new Vector3D();
+		_collision = false;
 
 		_maximumHealth = health;
 		_maximumStamina = stamina;
@@ -77,10 +85,11 @@ namespace bammm
 		_stamina = stamina;
 		_attack = attack;
 		_defense = defense;
-
-		_behavior = behavior;
-		_collision = false;
 		_alliance = alliance;
+		_level = 1;
+		_experience = 0;
+		_totalExperienceThisLevel = 1;
+		_behavior = behavior;
 	}
 
 	Actor::Actor(ActorInfo* info)
@@ -110,6 +119,9 @@ namespace bammm
 		_gold = info->getGold();
 		_coal = info->getCoal();
 		_BAC = 0;
+		_level = 1;
+		_experience = 0;
+		_totalExperienceThisLevel = 1;
 	}
 
 	void Actor::setMeleeWeapon(MeleeWeapon* weapon)

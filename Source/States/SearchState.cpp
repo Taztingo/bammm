@@ -79,7 +79,7 @@ namespace bammm
 			_sceneGraph->move(_actor, newloc);
 		}
 
-		Vector3D* targetActor = _sceneGraph->findInGrid(_target)->getLocation();
+		Vector3D* targetActor = _sceneGraph->findClosestInGrid(_actor, _target)->getLocation();
 
 		if (_actor->getLocation()->getX() == targetActor->getX() &&
 				_actor->getLocation()->getY() == targetActor->getY() &&

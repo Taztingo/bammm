@@ -33,8 +33,8 @@
 	],
 	
 	"buildings": [
-		{ "name":"Pub", "health":100, "stamina":0, "attack":0, "defense":10, "behavior":"block", "x":2, "y":1, "z":0, "alliance":0, "color":"purple", "symbol":"P", "collision":true },
-		{ "name":"Inn", "health":100, "stamina":0, "attack":0, "defense":12, "behavior":"block", "x":4, "y":3, "z":0, "alliance":0, "color":"purple", "symbol":"I", "collision":true }
+		{ "name":"Pub", "health":100, "stamina":0, "attack":0, "defense":10, "behavior":"block", "x":2, "y":1, "z":0, "alliance":0, "color":"purple", "symbol":"P", "collision":false },
+		{ "name":"Inn", "health":100, "stamina":0, "attack":0, "defense":12, "behavior":"block", "x":4, "y":3, "z":0, "alliance":0, "color":"purple", "symbol":"I", "collision":false }
 	],
 	
 	"trees": [
@@ -64,9 +64,9 @@
 		{ "name":"birch24", "health":20, "stamina":0, "attack":0, "defense":5, "behavior":"block", "x":16, "y":4, "z":0, "alliance":0, "color":"black", "symbol":"+", "collision":false },
 		{ "name":"birch25", "health":20, "stamina":0, "attack":0, "defense":5, "behavior":"block", "x":17, "y":4, "z":0, "alliance":0, "color":"black", "symbol":"+", "collision":false },
 		{ "name":"birch26", "health":20, "stamina":0, "attack":0, "defense":5, "behavior":"block", "x":18, "y":4, "z":0, "alliance":0, "color":"black", "symbol":"+", "collision":false },
-		{ "name":"cedar27", "health":20, "stamina":0, "attack":0, "defense":5, "behavior":"block", "x":19, "y":4, "z":0, "alliance":0, "color":"blue", "symbol":"+", "collision":false },
-		{ "name":"cedar28", "health":20, "stamina":0, "attack":0, "defense":5, "behavior":"block", "x":16, "y":5, "z":0, "alliance":0, "color":"blue", "symbol":"+", "collision":false },
-		{ "name":"cedar29", "health":20, "stamina":0, "attack":0, "defense":5, "behavior":"block", "x":17, "y":5, "z":0, "alliance":0, "color":"blue", "symbol":"+", "collision":false },
+		{ "name":"oak27", "health":20, "stamina":0, "attack":0, "defense":5, "behavior":"block", "x":19, "y":4, "z":0, "alliance":0, "color":"blue", "symbol":"+", "collision":false },
+		{ "name":"oak28", "health":20, "stamina":0, "attack":0, "defense":5, "behavior":"block", "x":16, "y":5, "z":0, "alliance":0, "color":"blue", "symbol":"+", "collision":false },
+		{ "name":"oak29", "health":20, "stamina":0, "attack":0, "defense":5, "behavior":"block", "x":17, "y":5, "z":0, "alliance":0, "color":"blue", "symbol":"+", "collision":false },
 		{ "name":"birch30", "health":20, "stamina":0, "attack":0, "defense":5, "behavior":"block", "x":18, "y":5, "z":0, "alliance":0, "color":"black", "symbol":"+", "collision":false },
 		{ "name":"birch31", "health":20, "stamina":0, "attack":0, "defense":5, "behavior":"block", "x":17, "y":6, "z":0, "alliance":0, "color":"black", "symbol":"+", "collision":false },
 		{ "name":"birch32", "health":20, "stamina":0, "attack":0, "defense":5, "behavior":"block", "x":14, "y":7, "z":0, "alliance":0, "color":"black", "symbol":"+", "collision":false },
@@ -76,7 +76,7 @@
 		{ "name":"birch36", "health":20, "stamina":0, "attack":0, "defense":5, "behavior":"block", "x":14, "y":10, "z":0, "alliance":0, "color":"black", "symbol":"+", "collision":false },
 		{ "name":"birch37", "health":20, "stamina":0, "attack":0, "defense":5, "behavior":"block", "x":13, "y":10, "z":0, "alliance":0, "color":"black", "symbol":"+", "collision":false },
 		{ "name":"birch38", "health":20, "stamina":0, "attack":0, "defense":5, "behavior":"block", "x":15, "y":11, "z":0, "alliance":0, "color":"black", "symbol":"+", "collision":false },
-		{ "name":"cedar39", "health":20, "stamina":0, "attack":0, "defense":5, "behavior":"block", "x":14, "y":11, "z":0, "alliance":0, "color":"blue", "symbol":"+", "collision":false },
+		{ "name":"oak39", "health":20, "stamina":0, "attack":0, "defense":5, "behavior":"block", "x":14, "y":11, "z":0, "alliance":0, "color":"blue", "symbol":"+", "collision":false },
 		{ "name":"oak40", "health":20, "stamina":0, "attack":0, "defense":5, "behavior":"block", "x":13, "y":11, "z":0, "alliance":0, "color":"green", "symbol":"+", "collision":false },
 		{ "name":"oak41", "health":20, "stamina":0, "attack":0, "defense":5, "behavior":"block", "x":14, "y":12, "z":0, "alliance":0, "color":"green", "symbol":"+", "collision":false },
 		{ "name":"oak42", "health":20, "stamina":0, "attack":0, "defense":5, "behavior":"block", "x":13, "y":12, "z":0, "alliance":0, "color":"green", "symbol":"+", "collision":false },
@@ -87,9 +87,9 @@
 		{ "name":"birch47", "health":20, "stamina":0, "attack":0, "defense":5, "behavior":"block", "x":11, "y":14, "z":0, "alliance":0, "color":"black", "symbol":"+", "collision":false },
 		{ "name":"oak48", "health":20, "stamina":0, "attack":0, "defense":5, "behavior":"block", "x":17, "y":15, "z":0, "alliance":0, "color":"green", "symbol":"+", "collision":false },
 		{ "name":"oak49", "health":20, "stamina":0, "attack":0, "defense":5, "behavior":"block", "x":16, "y":15, "z":0, "alliance":0, "color":"green", "symbol":"+", "collision":false },
-		{ "name":"cedar50", "health":20, "stamina":0, "attack":0, "defense":5, "behavior":"block", "x":17, "y":16, "z":0, "alliance":0, "color":"blue", "symbol":"+", "collision":false },
-		{ "name":"cedar51", "health":20, "stamina":0, "attack":0, "defense":5, "behavior":"block", "x":15, "y":16, "z":0, "alliance":0, "color":"blue", "symbol":"+", "collision":false },
-		{ "name":"cedar52", "health":20, "stamina":0, "attack":0, "defense":5, "behavior":"block", "x":16, "y":16, "z":0, "alliance":0, "color":"blue", "symbol":"+", "collision":false },
+		{ "name":"oak50", "health":20, "stamina":0, "attack":0, "defense":5, "behavior":"block", "x":17, "y":16, "z":0, "alliance":0, "color":"blue", "symbol":"+", "collision":false },
+		{ "name":"oak51", "health":20, "stamina":0, "attack":0, "defense":5, "behavior":"block", "x":15, "y":16, "z":0, "alliance":0, "color":"blue", "symbol":"+", "collision":false },
+		{ "name":"oak52", "health":20, "stamina":0, "attack":0, "defense":5, "behavior":"block", "x":16, "y":16, "z":0, "alliance":0, "color":"blue", "symbol":"+", "collision":false },
 		{ "name":"redwood53", "health":20, "stamina":0, "attack":0, "defense":5, "behavior":"block", "x":6, "y":16, "z":0, "alliance":0, "color":"red", "symbol":"+", "collision":false },
 		{ "name":"redwood54", "health":20, "stamina":0, "attack":0, "defense":5, "behavior":"block", "x":16, "y":17, "z":0, "alliance":0, "color":"red", "symbol":"+", "collision":false },
 		{ "name":"redwood55", "health":20, "stamina":0, "attack":0, "defense":5, "behavior":"block", "x":15, "y":17, "z":0, "alliance":0, "color":"red", "symbol":"+", "collision":false },
@@ -112,7 +112,7 @@
 	"ore": [
 		{ "name":"coal", "health":20, "stamina":0, "attack":0, "defense":2, "behavior":"block", "x":8, "y":0, "z":0, "alliance":0, "color":"black", "symbol":"^", "collision":false },
 		{ "name":"gold", "health":20, "stamina":0, "attack":0, "defense":2, "behavior":"block", "x":9, "y":0, "z":0, "alliance":0, "color":"yellow", "symbol":"^", "collision":false },
-		{ "name":"iron", "health":20, "stamina":0, "attack":0, "defense":2, "behavior":"block", "x":9, "y":1, "z":0, "alliance":0, "color":"white", "symbol":"^", "collision":false }
+		{ "name":"iron", "health":20, "stamina":0, "attack":0, "defense":2, "behavior":"block", "x":9, "y":1, "z":0, "alliance":0, "color":"white", "symbol":"^", "collision":false },
 		{ "name":"coal1", "health":20, "stamina":0, "attack":0, "defense":2, "behavior":"block", "x":0, "y":8, "z":0, "alliance":0, "color":"black", "symbol":"^", "collision":false },
 		{ "name":"coal2", "health":20, "stamina":0, "attack":0, "defense":2, "behavior":"block", "x":15, "y":12, "z":0, "alliance":0, "color":"black", "symbol":"^", "collision":false },
 		{ "name":"coal3", "health":20, "stamina":0, "attack":0, "defense":2, "behavior":"block", "x":16, "y":12, "z":0, "alliance":0, "color":"black", "symbol":"^", "collision":false },
@@ -122,10 +122,16 @@
 		{ "name":"gold4", "health":20, "stamina":0, "attack":0, "defense":2, "behavior":"block", "x":18, "y":19, "z":0, "alliance":0, "color":"yellow", "symbol":"^", "collision":false },
 		{ "name":"gold5", "health":20, "stamina":0, "attack":0, "defense":2, "behavior":"block", "x":16, "y":19, "z":0, "alliance":0, "color":"yellow", "symbol":"^", "collision":false },
 		{ "name":"iron1", "health":20, "stamina":0, "attack":0, "defense":2, "behavior":"block", "x":1, "y":9, "z":0, "alliance":0, "color":"white", "symbol":"^", "collision":false },
-		{ "name":"iron2", "health":20, "stamina":0, "attack":0, "defense":2, "behavior":"block", "x":12, "y":4, "z":0, "alliance":0, "color":"white", "symbol":"^", "collision":false },
 		{ "name":"iron3", "health":20, "stamina":0, "attack":0, "defense":2, "behavior":"block", "x":13, "y":4, "z":0, "alliance":0, "color":"white", "symbol":"^", "collision":false },
 		{ "name":"iron4", "health":20, "stamina":0, "attack":0, "defense":2, "behavior":"block", "x":12, "y":5, "z":0, "alliance":0, "color":"white", "symbol":"^", "collision":false },
 		{ "name":"iron5", "health":20, "stamina":0, "attack":0, "defense":2, "behavior":"block", "x":13, "y":5, "z":0, "alliance":0, "color":"white", "symbol":"^", "collision":false }
+	],
+	"dock": [
+		{ "name":"dock1", "health":20, "stamina":0, "attack":0, "defense":2, "behavior":"block", "x":13, "y":4, "z":0, "alliance":0, "color":"brown", "symbol":".", "collision":false },
+		{ "name":"dock2", "health":20, "stamina":0, "attack":0, "defense":2, "behavior":"block", "x":13, "y":5, "z":0, "alliance":0, "color":"brown", "symbol":".", "collision":false },
+		{ "name":"dock3", "health":20, "stamina":0, "attack":0, "defense":2, "behavior":"block", "x":12, "y":5, "z":0, "alliance":0, "color":"brown", "symbol":".", "collision":false },
+		{ "name":"dock4", "health":20, "stamina":0, "attack":0, "defense":2, "behavior":"block", "x":14, "y":4, "z":0, "alliance":0, "color":"brown", "symbol":".", "collision":false },
+		{ "name":"dock5", "health":20, "stamina":0, "attack":0, "defense":2, "behavior":"block", "x":11, "y":6, "z":0, "alliance":0, "color":"brown", "symbol":".", "collision":false }
 	],
 	"water": [
 		{ "name":"Water1", "health":100, "stamina":0, "attack":0, "defense":10, "behavior":"block", "x":15, "y":0, "z":0, "alliance":0, "color":"blue", "symbol":"~", "collision":true },
@@ -170,9 +176,9 @@
 		{ "name":"Water40", "health":100, "stamina":0, "attack":0, "defense":10, "behavior":"block", "x":3, "y":13, "z":0, "alliance":0, "color":"blue", "symbol":"~", "collision":true },
 		{ "name":"Water41", "health":100, "stamina":0, "attack":0, "defense":10, "behavior":"block", "x":0, "y":14, "z":0, "alliance":0, "color":"blue", "symbol":"~", "collision":true },
 		{ "name":"Water42", "health":100, "stamina":0, "attack":0, "defense":10, "behavior":"block", "x":1, "y":14, "z":0, "alliance":0, "color":"blue", "symbol":"~", "collision":true },
-		{ "name":"Water43", "health":100, "stamina":0, "attack":0, "defense":10, "behavior":"block", "x":2, "y":14, "z":0, "alliance":0, "color":"blue", "symbol":"~", "collision":true }
-		{ "name":"Bridge1", "health":100, "stamina":0, "attack":0, "defense":10, "behavior":"block", "x":9, "y":6, "z":0, "alliance":0, "color":"yellow", "symbol":"=", "collision":false }
-		{ "name":"Bridge2", "health":100, "stamina":0, "attack":0, "defense":10, "behavior":"block", "x":9, "y":7, "z":0, "alliance":0, "color":"yellow", "symbol":"=", "collision":false }
+		{ "name":"Water43", "health":100, "stamina":0, "attack":0, "defense":10, "behavior":"block", "x":2, "y":14, "z":0, "alliance":0, "color":"blue", "symbol":"~", "collision":true },
+		{ "name":"Bridge1", "health":100, "stamina":0, "attack":0, "defense":10, "behavior":"block", "x":9, "y":6, "z":0, "alliance":0, "color":"yellow", "symbol":"=", "collision":false },
+		{ "name":"Bridge2", "health":100, "stamina":0, "attack":0, "defense":10, "behavior":"block", "x":9, "y":7, "z":0, "alliance":0, "color":"yellow", "symbol":"=", "collision":false },
 		{ "name":"Bridge3", "health":100, "stamina":0, "attack":0, "defense":10, "behavior":"block", "x":4, "y":10, "z":0, "alliance":0, "color":"yellow", "symbol":"=", "collision":false }
 	]
 	

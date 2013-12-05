@@ -22,6 +22,7 @@
 #include "../Actors/Actor.h"
 #include "../SceneManager/Vector3D.h"
 #include "../Resources/Constant.h"
+#include "../Resources/Color.h"
 #include "../LevelingSystem/LevelingSystem.h"
 
 using namespace std;

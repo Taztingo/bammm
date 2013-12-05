@@ -195,7 +195,7 @@ namespace bammm
 			/**
 			 isFullyRested
 			 @Pre-Condition- no parameters
-			 @Post-Condition- returns true if healthBar and staminaBar are equal to 								MAX_HEALTH and MAX_STAMINA
+			 @Post-Condition- returns true if health and stamina are equal to maximumHealth and maximumStamina
 			 returns false otherwise;
 			 */
 			bool isFullyRested();

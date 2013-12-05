@@ -39,7 +39,6 @@ namespace bammm
 
 	void DamageState::breakdown()
 	{
-		//cout << "State is broken\n";
 	}
 
 	void DamageState::tick(float deltaTime)
@@ -47,11 +46,13 @@ namespace bammm
 		MeleeWeapon* weapon = _actor->getMeleeWeapon();
 		string attackerName = _actor->getName();
 		string targetName = _target->getName();
+		string weaponName = weapon->getType();
+
 		if (weapon->canAttack())
 		{
 			int damage = weapon->attack();
 			_target->reduceHealth(damage);
-			cout << attackerName << " hits " << targetName << " for " << Color::colorText(to_string(damage), "red")
+			cout << attackerName << " hits " << targetName << " with " << weaponName << " for " << Color::colorText(to_string(damage), "red")
 					<< " damage. ";
 			cout << targetName << " has " << Color::colorText(to_string(_target->getHealth()), "green") << " health.\n";
 			if (_target->getHealth() <= 0)
@@ -59,6 +60,7 @@ namespace bammm
 				cout << attackerName << Color::colorText(" has slain ", "red") << targetName << ".\n";
 
 				_actor = _levelingSystem.gainExperience(_actor);
+
 			}
 		}
 		else

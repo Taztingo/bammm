@@ -23,12 +23,12 @@
 #include "../States/BrawlState.h"
 #include "../States/SleepState.h"
 #include "../States/SingState.h"
-#include "../States/MineState.h"
 #include "../States/CombatState.h"
 #include "../States/DamageState.h"
+#include "../States/EatState.h"
 #include "../States/MoveState.h"
 #include "../States/SearchState.h"
-#include "../States/ChopState.h"
+#include "../States/GatherState.h"
 #include "../Resources/HashMap.h"
 #include "../Actors/Actor.h"
 #include "../States/StateMachine.h"
@@ -70,6 +70,13 @@ namespace bammm
 			 @Post-Condition- Returns a boolean representing fi the Controller can be deleted or not.
 			 */
 			virtual bool canDelete()=0;
+			
+			/**
+			 getActor
+			 @Pre-Condition- Takes nothing
+			 @Post-Condition- Returns the actor the controller uses
+			 */
+			virtual Actor* getActor()=0;
 
 			/**
 			 toString

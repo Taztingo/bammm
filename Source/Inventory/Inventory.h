@@ -27,6 +27,13 @@ namespace bammm
 			DynamicArray<Item*> _inventory;
 			uint _slots;
 			uint _usedSlots;
+			
+			/**
+			 getInventoryIndex
+			 @Pre-Condition- Reference to an item
+			 @Post-Condition- Returns the index of the found item
+			 */
+			int getInventoryIndex(Item& item);
 
 		public:
 			Inventory();
@@ -81,6 +88,13 @@ namespace bammm
 			 @Post-Condition- Returns the amount of used slots
 			 */
 			uint getUsedSlots();
+			
+			/**
+			 toString
+			 @Pre-Condition- None
+			 @Post-Condition- Returns the sring representation of the inventory
+			 */
+			string toString();
 	};
 }
 

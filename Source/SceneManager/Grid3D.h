@@ -25,6 +25,7 @@
 #include "../Resources/Color.h"
 #include "../Resources/Tree.h"
 #include "../Resources/TreeNode.h"
+#include <math.h>
 
 using namespace std;
 
@@ -37,9 +38,6 @@ namespace bammm
 			int _width;
 			int _length;
 			int _height;
-
-			//Directions
-
 
 			/*
 			 convertToPosition
@@ -123,6 +121,20 @@ namespace bammm
 			 */
 			T findInGrid(string target);
 
+			/*
+			 findClosestInGrid
+			 @Pre-Condition- Takes a unit to search from and target's type
+			 @Post-Condition- Returns the Actor of the target's type.
+			 */
+			T findClosestInGrid(T unit, string target);
+
+			/*
+			 getDistance
+			 @Pre-Condition- Takes two vector references
+			 @Post-Condition- Returns the distance between two vectors
+			 */
+			float getDistance(Vector3D& vector1, Vector3D& vector2);
+			
 			/*
 			 toString
 			 @Pre-Condition- No input
@@ -287,7 +299,7 @@ namespace bammm
 	template<class T>
 	Queue<Vector3D*>* Grid3D<T>::getPath(Actor* actor, string destination)
 	{
-		Vector3D* target = findInGrid(destination)->getLocation();
+		Vector3D* target = findClosestInGrid(actor, destination)->getLocation();
 		Vector3D* actorLocation = actor->getLocation();
 
 		int actorLocInt = convertToPosition(actorLocation);
@@ -436,16 +448,50 @@ namespace bammm
 	}
 
 	template<class T>
+	T Grid3D<T>::findClosestInGrid(T unit, string target)
+	{
+		T closest = NULL;
+		float minDistance = 1000;
+		for (uint gridIndex = 0; gridIndex < _grid->getSize(); gridIndex++)
+		{
+			DynamicArray<T>* cell = _grid->get(gridIndex);
+			for (uint cellIndex = 0; cellIndex < cell->getSize(); cellIndex++)
+			{
+				T actor = cell->get(cellIndex);
+				if (actor->toString().find(target)!=string::npos)
+				{
+					float distance = getDistance(*unit->getLocation(), *actor->getLocation());
+					if(distance < minDistance && !(unit == actor))
+					{
+						closest = actor;
+					}
+				}
+			}
+		}
+		return closest;
+	}
+
+	template<class T>
+	float Grid3D<T>::getDistance(Vector3D& vector1, Vector3D& vector2)
+	{
+		float x = pow(vector1.getX() - vector2.getX(), 2);
+		float y = pow(vector1.getY() - vector2.getY(), 2);
+		float z = pow(vector1.getZ() - vector2.getZ(), 2);
+
+		return sqrt(x+y+z);
+	}
+
+	template<class T>
 	string Grid3D<T>::toString()
 	{
 		string gridString = "";
 
-		for (int i = 0; i < _length; i++)
+		for (int y = 0; y < _length; y++)
 		{
-			for (int i2 = 0; i2 < _width; i2++)
+			for (int x = 0; x < _width; x++)
 			{
 				DynamicArray<T>* atLocation;
-				atLocation = access(i, i2, 0);
+				atLocation = access(x, y, 0);
 
 				if (atLocation->getSize() <= 0)
 				{
@@ -498,7 +544,7 @@ namespace bammm
 		}
 		else
 		{
-			delete newLocation;
+			//delete newLocation;
 		}
 	}
 

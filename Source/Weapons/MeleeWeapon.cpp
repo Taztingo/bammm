@@ -47,4 +47,9 @@ namespace bammm
 		}
 		return true;
 	}
+
+	string MeleeWeapon::getType()
+	{
+		return _weaponData.getType();
+	}
 }

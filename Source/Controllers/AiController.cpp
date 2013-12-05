@@ -30,7 +30,6 @@ namespace bammm
 
 		//Create the states
 		DrinkState* drinkState = new DrinkState(actor, &_stateMachine);
-		MineState* mineState = new MineState(actor, &_stateMachine);
 		SingState* singState = new SingState(actor, &_stateMachine);
 		BrawlState* brawlState = new BrawlState(actor, &_stateMachine);
 		SleepState* sleepState = new SleepState(actor, &_stateMachine);
@@ -38,9 +37,9 @@ namespace bammm
 		CombatState* combatState = new CombatState(actor, &_stateMachine);
 		DamageState* damageState = new DamageState(actor, &_stateMachine);
 		MoveState* moveState = new MoveState(actor, &_stateMachine, sceneGraph);
+		GatherState* gatherState = new GatherState(actor, &_stateMachine);
 
 		_states.add(idleState->toString(), idleState);
-		_states.add(mineState->toString(), mineState);
 		_states.add(drinkState->toString(), drinkState);
 		_states.add(singState->toString(), singState);
 		_states.add(brawlState->toString(), brawlState);
@@ -48,6 +47,7 @@ namespace bammm
 		_states.add(combatState->toString(), combatState);
 		_states.add(moveState->toString(), moveState);
 		_states.add(damageState->toString(), damageState);
+		_states.add(gatherState->toString(), gatherState);
 
 		//Put actor in idle state
 		_stateMachine.initialState(_states.getValue(idleState->toString()));
@@ -131,5 +131,10 @@ namespace bammm
 	string AiController::toString()
 	{
 		return "AiController";
+	}
+
+	Actor* AiController::getActor()
+	{
+		return _actor;
 	}
 }

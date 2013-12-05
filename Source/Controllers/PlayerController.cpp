@@ -35,7 +35,6 @@ namespace bammm
 
 		//Create the states
 		DrinkState* drinkState = new DrinkState(actor, &_stateMachine);
-		MineState* mineState = new MineState(actor, &_stateMachine);
 		SingState* singState = new SingState(actor, &_stateMachine);
 		BrawlState* brawlState = new BrawlState(actor, &_stateMachine);
 		SleepState* sleepState = new SleepState(actor, &_stateMachine);
@@ -44,10 +43,10 @@ namespace bammm
 		SearchState* searchState = new SearchState(actor, &_stateMachine, *_sceneGraph);
 		DamageState* damageState = new DamageState(actor, &_stateMachine);
 		MoveState* moveState = new MoveState(actor, &_stateMachine, sceneGraph);
-		ChopState* chopState = new ChopState(actor, &_stateMachine);
+		GatherState* gatherState = new GatherState(actor, &_stateMachine);
+		EatState* eatState = new EatState(actor, &_stateMachine);
 
 		_states.add(idleState->toString(), idleState);
-		_states.add(mineState->toString(), mineState);
 		_states.add(drinkState->toString(), drinkState);
 		_states.add(singState->toString(), singState);
 		_states.add(brawlState->toString(), brawlState);
@@ -56,10 +55,11 @@ namespace bammm
 		_states.add(searchState->toString(), searchState);
 		_states.add(damageState->toString(), damageState);
 		_states.add(moveState->toString(), moveState);
-		_states.add(chopState->toString(), chopState);
+		_states.add(gatherState->toString(), gatherState);
+		_states.add(eatState->toString(), eatState);
 
 		//Put actor in default behavior state
-		_stateMachine.initialState(_states.getValue(searchState->toString()));
+		_stateMachine.initialState(_states.getValue(idleState->toString()));
 	}
 
 	void PlayerController::input(DynamicArray<string>* commandString,
@@ -78,99 +78,68 @@ namespace bammm
 		woodType->add("redwood");
 		woodType->add("birch");
 		woodType->add("oak");
-		woodType->add("cedar");
 
+		DynamicArray<string>* fishType = new DynamicArray<string>();
+		fishType->add("swordfish");
+		fishType->add("tuna");
+		fishType->add("salmon");
 
-		if (newState == "mine")
+		DynamicArray<string>* foodTypes = new DynamicArray<string>();
+		foodTypes->add("fish");
+
+		if (newState == "mine" || newState == "chop" || newState == "fish")
 		{
-			//mine [#] [ore-type]
-			int numOre;
+			int numToGather;
 			string type;
-			_states.getValue(newState);
 
 			if (commandString->getSize() == 3)
 			{
-				string number_str = commandString->get(1);
+				string arg1 = commandString->get(1);
+				numToGather = atoi(arg1.c_str());
 
-				numOre = atoi(number_str.c_str());
-				if (numOre == 0)
+				if (numToGather == 0)
 				{
-					cout << "Invalid argument number\n";
+					cout << "Invalid argument number \n";
 					return;
-					//doTick = false;
 				}
-				//numOre = 0;
+
 				type = commandString->get(2);
-				if (!(oreType->contains(type)))
+				if ( (newState == "mine" && !(oreType->contains(type))) )
 				{
-					cout << type << " is not a valid ore type\n";
+					cout << "Invalid ore type" << endl;
 					return;
-					//doTick = false;
 				}
-				//Add to controllerinput
-				Actor* ore = _sceneGraph->findInGrid(type);
-				stateToAdd = _states.getValue(newState);
-				MineState* tempState = static_cast<MineState*>(stateToAdd);
-				tempState->setAmount(numOre);
-				tempState->setOre(ore);
+				else if ( (newState == "chop" && !(woodType->contains(type))) )
+				{
+					cout << "Invalid wood type" << endl;
+					return;
+				}
+				else if ( (newState == "fish" && !(fishType->contains(type))) )
+				{
+					cout << "Invalid fish type" << endl;	
+					return;
+				}
 
-				cout << _actor->getName() << " has been sent to mine " << type << "!" << endl;
+				cout << _actor->getName() << " has been sent to " << newState << " " << type << "!" << endl;
+
+
+				if (newState == "fish")
+				{
+					type = "dock";
+				}
+
+				Actor* target = _sceneGraph->findInGrid(type);
+				stateToAdd = _states.getValue("gather");
+				GatherState* tempState = static_cast<GatherState*>(stateToAdd);
+				tempState->setAmount(numToGather);
+				tempState->setTarget(target);
+
+				//Add to controllerinput
 				SearchState* search = static_cast<SearchState*>(_states.getValue("search"));
 				search->setTarget(type);
 				search->setDestState(tempState);
 				_stateMachine.addState(search);
 
-			}
-			else
-			{
-				cout << "Invalid input\n";
-				//doTick = false;
-			}
-
-		}
-		else if (newState == "chop")
-		{
-			//mine [#] [ore-type]
-			int numWood;
-			string type;
-			_states.getValue(newState);
-
-			if (commandString->getSize() == 3)
-			{
-				string number_str = commandString->get(1);
-
-				numWood = atoi(number_str.c_str());
-				if (numWood == 0)
-				{
-					cout << "Invalid argument number\n";
-					return;
-					//doTick = false;
-				}
-
-				type = commandString->get(2);
-				if (!(woodType->contains(type)))
-				{
-					cout << type << " is not a valid ore type\n";
-					return;
-					//doTick = false;
-				}
-				//Add to controllerinput
-				Actor* ore = _sceneGraph->findInGrid(type);
-				stateToAdd = _states.getValue(newState);
-				ChopState* tempState = static_cast<ChopState*>(stateToAdd);
-				tempState->setAmount(numWood);
-				tempState->setTree(ore);
-
-				cout << _actor->getName() << " has been sent to chop " << type << "!" << endl;
-				SearchState* search = static_cast<SearchState*>(_states.getValue("search"));
-				search->setTarget(type);
-				search->setDestState(tempState);
-				_stateMachine.addState(search);
-
-			}
-			else
-			{
-				cout << "Invalid input\n";
 			}
 		}
 		else if (newState == "drink")
@@ -182,6 +151,39 @@ namespace bammm
 			search->setTarget("Pub");
 			search->setDestState(stateToAdd);
 			_stateMachine.addState(search);
+		}
+		else if (commandString->getSize() == 3 && newState == "eat")
+		{
+			string arg1 = commandString->get(1);
+			int numToEat = atoi(arg1.c_str());
+
+			if (numToEat == 0)
+			{
+				cout << "Invalid argument number \n";
+				return;
+			}
+
+			string type = commandString->get(2);
+			if (!(foodTypes->contains(type)))
+			{
+				cout << "Invalid argument number \n";
+				return;
+			}
+
+
+			EatState* tempState = static_cast<EatState*>(_states.getValue(newState));
+			tempState->setAmount(numToEat);
+			tempState->setType(type);
+			_stateMachine.addState(tempState);
+		}
+		else if (newState == "inventory")
+		{
+			cout << _actor->getInventory().toString() << endl;
+		}
+
+		else
+		{
+			cout << "Invalid command" << endl;
 		}
 
 	}
@@ -213,6 +215,21 @@ namespace bammm
 
 	void PlayerController::tick(float deltaTime)
 	{
+		Actor* enemy = _sceneGraph->getEnemy(_actor->getLocation(), _actor);
+		DynamicArray<State*>& currentStates = _stateMachine.getCurrentStates();
+		State* newState;
+
+		if (enemy)
+		{
+			newState = _states.getValue("damage");
+
+			if(!currentStates.contains(newState))
+			{
+				_stateMachine.addState(newState);
+				DamageState* castedState = static_cast<DamageState*>(newState);
+				castedState->setTarget(*enemy);
+			}
+		}
 
 		_stateMachine.tick(deltaTime);
 	}
@@ -235,6 +252,11 @@ namespace bammm
 	HashMap<State*>& PlayerController::allStates()
 	{
 		return _states;
+	}
+
+	Actor* PlayerController::getActor()
+	{
+		return _actor;
 	}
 
 }

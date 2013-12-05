@@ -40,6 +40,7 @@ namespace bammm
 		cout << "wrong breakdown" << "\n";
 	}
 
+
 	void State::tick(float deltaTime)
 	{
 		cout << "In parent state\n";

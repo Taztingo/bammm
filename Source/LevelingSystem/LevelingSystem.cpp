@@ -39,8 +39,8 @@ namespace bammm
 
 		cout << "DING! " << actor->getName() << " has reached level "
 				<< actor->getLevel() << "!" << endl;
-		cout << "His powers have improved: " << actor->getHealth() << " "
-				<< actor->getAttack() << " " << actor->getDefense() << endl;
+		cout << "Their powers have improved: Health: " << actor->getHealth() << " Damage: "
+				<< actor->getAttack() << " Defense: " << actor->getDefense() << endl;
 		cout << actor->getTotalExperienceThisLevel()
 				<< " more kills till next level." << endl;
 

@@ -50,6 +50,13 @@ namespace bammm
 			 @Post-Condition- Returns true if weapon can attack
 			 */
 			virtual bool canAttack();
+
+			/**
+			 getType
+			 @Pre-Condition- No input
+			 @Post-Condition- Returns a string containing the weapon type.
+			 */
+			virtual string getType();
 	};
 }
 

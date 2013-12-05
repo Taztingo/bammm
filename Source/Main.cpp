@@ -34,7 +34,7 @@ int main()
 	sceneManager.setMeleeCombat(meleeCombat);
 
 	//Will be deleted; controllers are added for each new actor created in factory
-	PlayerController controller;
+	//PlayerController controller;
 
 	bool playGame = true;
 	bool doTick = true;
@@ -47,14 +47,18 @@ int main()
 	//string sleep = "sleep";
 	validCommands.add("mine");
 	validCommands.add("drink");
-	validCommands.add("sing");
 	validCommands.add("brawl");
-	validCommands.add("attack");
 	validCommands.add("chop");
+	validCommands.add("fish");
+	validCommands.add("focus");
+	validCommands.add("lose");
+	validCommands.add("inventory");
+	validCommands.add("eat");
 
 	float deltaTime = 0;
 	while (playGame)
 	{
+		command = "";
 		doTick = true;
 		bool doInput = true;
 		if (loopCounter == 0)
@@ -67,11 +71,12 @@ int main()
 				cout << sceneManager.getSceneGraph().toString() << "\n";
 			}
 
-			cout << "What would you like your dwarves to do? ";
-
 			//controller.printOptions();
-			getline(cin, command);
-
+			while (command == "")
+			{
+				cout << "What would you like your dwarves to do? ";
+				getline(cin, command);
+			}
 			input = parseInput(command);
 			command = input->get(0);
 
@@ -143,7 +148,7 @@ int main()
 	delete input;
 
 	cout << "Thanks for playing!" << "\n";
-	return 1;
+	exit(1);
 }
 
 void printWelcome()
@@ -170,6 +175,8 @@ void printStory()
 			<< "The Orcs want to implement a new networking system in our fortress, but FUCK THAT! I've seen their code. \n";
 	cout
 			<< "Here, in our fortress of New York, we make our final stand against their bullshit... \n\n";
+	cout
+			<< "You have control over the actions of Bob, Jim, Joe, Phil, and Frank.\n\n";
 }
 
 DynamicArray<string>* parseInput(string input)

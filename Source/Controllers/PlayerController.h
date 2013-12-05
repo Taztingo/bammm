@@ -99,6 +99,13 @@ namespace bammm
 			@Post-Condition- returns current all states in _stateMachine
 			*/
 			HashMap<State*>& allStates();
+			
+			/**
+			getActor
+			@Pre-Condition- Takes nothing
+			@Post-Condition- Returns the actor the controller uses
+			*/
+			virtual Actor* getActor();
 	};
 }
 

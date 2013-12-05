@@ -23,7 +23,7 @@ namespace bammm
 	SceneManager::SceneManager() :
 			_sceneGraph(SCENE_X, SCENE_Y, SCENE_Z)
 	{
-
+		_focus = NULL;
 	}
 
 	SceneManager::~SceneManager()
@@ -54,7 +54,6 @@ namespace bammm
 			this->addTickable(controller);
 			this->addAiController(controller);
 		}
-
 	}
 
 	Actor* SceneManager::removeActor(Actor* actor)
@@ -93,18 +92,31 @@ namespace bammm
 	void SceneManager::tick(float deltaTime)
 	{
 		int size = _allTickables.getSize();
+
 		for (int i = 0; i < size; i++)
 		{
 			ITickable* tickable = _allTickables.get(i);
-			if (tickable->canDelete())
+			PlayerController* playerController =
+					static_cast<PlayerController*>(tickable);
+			AiController* aiController = static_cast<AiController*>(tickable);
+
+			if (playerController->canDelete())
 			{
-				PlayerController* playerController = static_cast<PlayerController*>(tickable);
-				AiController* aiController = static_cast<AiController*>(tickable);
-				size--;
+				Actor* removedActor = playerController->getActor();
 				_allPlayerControllers.removeElement(playerController);
-				_allAiControllers.removeElement(aiController);
-				removeActor(_allActors.get(i));
+				removeActor(removedActor);
 				removeTickable(tickable);
+				size--;
+				i--;
+			}
+			else if (aiController->canDelete())
+			{
+
+				Actor* removedActor = aiController->getActor();
+				_allAiControllers.removeElement(aiController);
+				removeActor(removedActor);
+				removeTickable(tickable);
+				size--;
 				i--;
 			}
 			else
@@ -116,71 +128,60 @@ namespace bammm
 
 	void SceneManager::input(DynamicArray<string>* args, float deltaTime)
 	{
-
 		string newState = args->get(0);
-		//bool doTick = true;
 
-		PlayerController* controller = this->findController(newState);
-		if (controller == NULL)
+		if (newState == "focus")
 		{
-			return;
-		}
-		controller->input(args, deltaTime);
-		/*
-		else if (newState == "sing")
-		{
-			//sing [songname]
-			string songname;
-			if (commandString->getSize() >= 2)
+			if (args->getSize() == 2)
 			{
-				for (unsigned int i = 1; i < commandString->getSize(); i++)
-				{
-					songname += commandString->get(i);
-				}
+				_focus = getControllerByActor(args->get(1));
+				return;
 			}
 			else
 			{
-				cout << "Invalid input\n";
-				doTick = false;
+				cout << "Invalid arguments" << endl;
 			}
 		}
-		else if (newState == "brawl")
+		else if (newState == "lose")
 		{
-			//how even
-
-		}
-		else if (newState == "attack")
-		{
-			//attack [actor name]
-
-		}
-		else if (newState == "drink")
-		{
-			//drink [beverage name]
-			string beverage;
-			try
+			if (args->getSize() == 2 && args->get(1) == "focus")
 			{
-				beverage = commandString->get(1);
+				_focus = NULL;
+				return;
 			}
-			catch (exception& e)
+			else
 			{
-				cout << "Invalid beverage name.\n";
+				cout << "Invalid arguments" << endl;
+			}
+		}
+		else if ((newState == "eat" || newState == "inventory") && _focus == NULL)
+		{
+			cout
+					<< "Invalid input: Must be focused on a Dwarf to use this command."
+					<< endl;
+			return;
+		}
+
+		PlayerController* controller;
+
+		if (_focus == NULL)
+		{
+			controller = this->findController(newState);
+			if (controller == NULL)
+			{
+				return;
 			}
 		}
 		else
 		{
-			cout << "Invalid input\n";
-			doTick = false;
+			controller = _focus;
+			while (controller->runningStates().getSize() > 0)
+			{
+				controller->runningStates().remove(0);
+			}
 		}
 
-
-		if (doTick)
-		{
-			State* stateToAdd = _states.getValue(newState);
-			_stateMachine.addState(stateToAdd, commandString);
-			_stateMachine.tick(deltaTime);
-		}
-		*/
+		controller->input(args, deltaTime);
 	}
 
 	string SceneManager::toString()
@@ -198,23 +199,42 @@ namespace bammm
 			DynamicArray<State*>& runningStates = current->runningStates();
 			HashMap<State*>& allStates = current->allStates();
 
-			if (current->numberOfStates()==0)  //return *current
+			if (current->numberOfStates() == 0)  //return *current
 			{
 				return current;
 			}
-			else if ((runningStates.getSize() == 1) &&
-						((runningStates.contains(allStates.getValue("drink"))) ||
-						(runningStates.contains(allStates.getValue("sing"))) ||
-						(runningStates.contains(allStates.getValue("sleep"))) ||
-						(runningStates.contains(allStates.getValue("idle"))))
-					)
+			else if ((runningStates.getSize() == 1)
+					&& ((runningStates.contains(allStates.getValue("drink")))
+							|| (runningStates.contains(
+									allStates.getValue("sing")))
+							|| (runningStates.contains(
+									allStates.getValue("sleep")))
+							|| (runningStates.contains(
+									allStates.getValue("idle")))))
 			{
-				cout << "interruptable" << endl;
+				runningStates.remove(0);
 				return current;
 			}
 
 		}
+		cout << "Sorry, all your dwarves are busy!" << endl;
 
+		return NULL;
+	}
+
+	PlayerController* SceneManager::getControllerByActor(string name)
+	{
+		PlayerController* current;
+		for (unsigned int i = 0; i < _allPlayerControllers.getSize(); i++)
+		{
+			current = _allPlayerControllers.get(i);
+			if (current->getActor()->getName() == name)
+			{
+				cout << "Focused on " << name << "!" << endl;
+				return current;
+			}
+		}
+		cout << "A Dwarf by the name of " << name << " was not found." << endl;
 		return NULL;
 	}
 

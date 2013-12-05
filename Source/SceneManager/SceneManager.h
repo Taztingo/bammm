@@ -36,6 +36,7 @@ namespace bammm
 			DynamicArray<ITickable*> _allTickables;
 			DynamicArray<PlayerController*> _allPlayerControllers;
 			DynamicArray<AiController*> _allAiControllers;
+			PlayerController * _focus;
 
 			static const int SCENE_X = 20;
 			static const int SCENE_Y = 20;
@@ -123,6 +124,14 @@ namespace bammm
 			 @Post-Condition- sends input to not busy PlayerController
 			 */
 			void input(DynamicArray<string>* args, float deltaTime);
+
+			/**
+			 getControllerByActor
+			 @Pre-Condition- takes string name
+			 @Pre-Condition- returns controller with actor of matching name
+			 */
+			PlayerController* getControllerByActor(string name);
+
 	};
 }
 

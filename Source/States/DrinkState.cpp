@@ -19,7 +19,6 @@ namespace bammm
 	DrinkState::DrinkState(Actor& actor)
 	{
 		_actor = &actor;
-
 	}
 
 	DrinkState::DrinkState(Actor& actor, IStateCallback* stateMachine)
@@ -27,11 +26,6 @@ namespace bammm
 		_actor = &actor;
 		registerTransitionCallback(stateMachine);
 	}
-
-	/*void DrinkState::setup(DynamicArray<string>* args)
-	 {
-	 _stoutLife = _stoutSize;
-	 }*/
 
 	void DrinkState::setup()
 	{
