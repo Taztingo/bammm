@@ -23,7 +23,7 @@ namespace bammm
 
 	void Factory::setup()
 	{
-		//Parsing weapon data in
+		//Parsing weapon data in//
 		JSONParser* weaponParser = new JSONParser();
 		string weaponFilename = "JSON/weapons.json";
 		weaponParser->parseFile(weaponFilename);
@@ -31,11 +31,11 @@ namespace bammm
 		JSON* weaponRoot = weaponParser->getRootNode("root");
 		HashMap<JSON*>* weaponRootChildren = weaponRoot->getAllChildren();
 
-		//Parse the melee weapons
+		//Parse the melee weapons//
 		JSON* meleeWeapons = weaponRootChildren->getValue("meleeWeapons");
 		this->parseMeleeWeaponToWeaponData(meleeWeapons, &_meleeWeaponData);
 
-		//Parse the ranged weapons
+		//Parse the ranged weapons//
 		JSON* rangedWeapons = weaponRootChildren->getValue("rangedWeapons");
 		this->parseRangedWeaponToWeaponData(rangedWeapons, &_rangedWeaponData);
 
@@ -49,6 +49,14 @@ namespace bammm
 
 		JSON* orcs = actorRootChildren->getValue("orcs");
 		this->parseToActorInfo(orcs, "orc", &_actorData);
+
+		//Parse craftable item database//
+		JSONParser* craftableParser = new JSONParser();
+		string craftableFilename ="JSON/craftables.json";
+		weaponParser->parseFile(craftableFilename);
+
+		JSON* craftableRoot = craftableParser->getRootNode("root");
+
 		//===========MAP=========//
 		JSON* wall = actorRootChildren->getValue("wall");
 		this->parseToActorInfo(wall, "wall", &_blockData);
@@ -301,5 +309,12 @@ namespace bammm
 
 			map->add(type, *weaponData); //Save this data in the map.
 		}
+	}
+
+	void Factory::parseCraftables(JSON* rootNode, HashMap<Item>* map)
+	{
+			//take in the parser and create a map of items/ingredients
+		//int numberOfChildren = rootNode->sizeOfChildren();
+		//DynamicArray<JSON*>* rootChildren = rootNode->getAllChildren()->getAllValues();
 	}
 }
