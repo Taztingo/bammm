@@ -29,6 +29,7 @@ namespace bammm
 			string _name;
 			//IAction* _action;
 			uint _amount;
+			DynamicArray<Item> _ingredients;
 
 		public:
 			Item();
@@ -77,6 +78,13 @@ namespace bammm
 			 Post-Condition- Returns true if two items have same name
 			 */
 			bool operator==(const Item& item2);
+
+			DynamicArray<Item>& getIngredients();
+
+			void setIngredients(DyanmicArray<Item> ingredients);
+
+			void addIngredient(Item ingredient);
+
 
 	};
 }

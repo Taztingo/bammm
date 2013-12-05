@@ -32,7 +32,7 @@ namespace bammm
 		_name = name;
 		_amount = 1;
 	}
-	
+
 	Item::Item(string name, int amount)
 	{
 		_name = name;
@@ -44,10 +44,10 @@ namespace bammm
 	}
 
 	/*void Item::action(Actor* target, int amount)
-	{
-		_action->action(target, amount);
-	}*/
-	
+	 {
+	 _action->action(target, amount);
+	 }*/
+
 	uint Item::getAmount()
 	{
 		return _amount;
@@ -70,11 +70,28 @@ namespace bammm
 
 	bool Item::operator==(const Item& item)
 	{
-		if(_name == item._name)
+		if (_name == item._name)
 		{
 			return true;
 		}
 
 		return false;
 	}
+
+	DynamicArray<Item>& Item::getIngredients()
+	{
+		return &_ingredients;
+	}
+
+	void Item::setIngredients(DynamicArray<Item>& ingredients)
+	{
+		_ingredients = ingredients;
+	}
+
+	void Item::addIngredients(Item& ingredient)
+	{
+		_ingredients.add(ingredient);
+	}
+
 }
+

@@ -39,6 +39,7 @@ namespace bammm
 		JSON* rangedWeapons = weaponRootChildren->getValue("rangedWeapons");
 		this->parseRangedWeaponToWeaponData(rangedWeapons, &_rangedWeaponData);
 
+		//Parse actor information//
 		JSONParser* actorParser = new JSONParser();
 		string actorFilename = "JSON/actors.json";
 		actorParser->parseFile(actorFilename);
@@ -53,9 +54,10 @@ namespace bammm
 		//Parse craftable item database//
 		JSONParser* craftableParser = new JSONParser();
 		string craftableFilename ="JSON/craftables.json";
-		weaponParser->parseFile(craftableFilename);
+		craftableParser->parseFile(craftableFilename);
 
 		JSON* craftableRoot = craftableParser->getRootNode("root");
+		HashMap<JSON*>* craftableRootChildren = craftableRoot->getAllChildren();
 
 		//===========MAP=========//
 		JSON* wall = actorRootChildren->getValue("wall");
