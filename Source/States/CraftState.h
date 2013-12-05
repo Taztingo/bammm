@@ -25,6 +25,9 @@ namespace bammm
 
 		private:
 
+			int _craftableAmount;
+			Item* _craftableItem;
+
 		public:
 
 			CraftState(Actor& actor);
@@ -52,11 +55,22 @@ namespace bammm
 			virtual void tick(float deltaTime);
 
 			/**
+			 switchState
+			 @Pre-Condition- Takes in a string nextState
+			 @Post-Condition- The current state is switched to the given nextState
+			 */
+			virtual void switchState(string nextState);
+
+			/**
 			 toString
 			 @Pre-Condition- No input
 			 @Post-Condition- Returns a string representation of the state
 			 */
 			string toString();
+
+			void setCraftable(Item* craftableItem);
+
+			void setAmount(int craftableAmount);
 
 	};
 
