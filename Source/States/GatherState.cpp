@@ -171,13 +171,13 @@ namespace bammm
 			}
 
 			Item wood("wood", true);
-			if(_target->getInventory().contains(coal))
+			if(_target->getInventory().contains(wood))
 			{
 				canMine++;
 			}
 
 			Item fish("fish", true);
-			if(_target->getInventory().contains(coal))
+			if(_target->getInventory().contains(fish))
 			{
 				canMine++;
 			}
