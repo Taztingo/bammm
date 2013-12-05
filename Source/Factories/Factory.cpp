@@ -23,7 +23,7 @@ namespace bammm
 
 	void Factory::setup()
 	{
-		//Parsing weapon data in
+		//Parsing weapon data in//
 		JSONParser* weaponParser = new JSONParser();
 		string weaponFilename = "JSON/weapons.json";
 		weaponParser->parseFile(weaponFilename);
@@ -31,14 +31,15 @@ namespace bammm
 		JSON* weaponRoot = weaponParser->getRootNode("root");
 		HashMap<JSON*>* weaponRootChildren = weaponRoot->getAllChildren();
 
-		//Parse the melee weapons
+		//Parse the melee weapons//
 		JSON* meleeWeapons = weaponRootChildren->getValue("meleeWeapons");
 		this->parseMeleeWeaponToWeaponData(meleeWeapons, &_meleeWeaponData);
 
-		//Parse the ranged weapons
+		//Parse the ranged weapons//
 		JSON* rangedWeapons = weaponRootChildren->getValue("rangedWeapons");
 		this->parseRangedWeaponToWeaponData(rangedWeapons, &_rangedWeaponData);
 
+		//Parse actor information//
 		JSONParser* actorParser = new JSONParser();
 		string actorFilename = "JSON/actors.json";
 		actorParser->parseFile(actorFilename);
@@ -46,16 +47,24 @@ namespace bammm
 		JSON* actorRoot = actorParser->getRootNode("root");
 
 		HashMap<JSON*>* actorRootChildren = actorRoot->getAllChildren();
-
+		
 		JSON* orcs = actorRootChildren->getValue("orcs");
 		this->parseToActorInfo(orcs, "orc", &_actorData);
 
 		//Parse craftable item database//
 		JSONParser* craftableParser = new JSONParser();
+<<<<<<< HEAD
 		string craftableFilename = "JSON/craftables.json";
 		craftableParser->parseFile(craftableFilename);
 
 		JSON* craftableRoot = craftableParser->getRootNode("root");
+=======
+		string craftableFilename ="JSON/craftables.json";
+		craftableParser->parseFile(craftableFilename);
+
+		JSON* craftableRoot = craftableParser->getRootNode("root");
+		HashMap<JSON*>* craftableRootChildren = craftableRoot->getAllChildren();
+>>>>>>> d0ea96665adee670f7c80aa2ec85c6f475316ea3
 
 		//===========MAP=========//
 		JSON* wall = actorRootChildren->getValue("wall");
@@ -263,11 +272,19 @@ namespace bammm
 				}
 			}
 
+<<<<<<< HEAD
 			if (name.find("dock") != string::npos)
 			{
 				Inventory& inventory = myActor->getInventory();
 				inventory.setSlots(100);
 				for (int j = 0; j < fish; j++)
+=======
+			if(name.find("dock") != string::npos)
+			{
+				Inventory& inventory = myActor->getInventory();
+				inventory.setSlots(100);
+				for(int j = 0; j < fish; j++)
+>>>>>>> d0ea96665adee670f7c80aa2ec85c6f475316ea3
 				{
 					Item* item = new Item("fish", color, true);
 					inventory.addItem(item);
@@ -324,5 +341,12 @@ namespace bammm
 
 			map->add(type, *weaponData); //Save this data in the map.
 		}
+	}
+
+	void Factory::parseCraftables(JSON* rootNode, HashMap<Item>* map)
+	{
+			//take in the parser and create a map of items/ingredients
+		//int numberOfChildren = rootNode->sizeOfChildren();
+		//DynamicArray<JSON*>* rootChildren = rootNode->getAllChildren()->getAllValues();
 	}
 }

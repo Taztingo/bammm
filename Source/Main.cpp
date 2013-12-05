@@ -25,10 +25,11 @@ int main()
 	bool printMap = true;
 
 	SceneManager sceneManager;
-	Factory* actorFactory = new Factory(&sceneManager);
+	extern Factory* factory;
+	factory = new Factory(&sceneManager);
 	MeleeCombat meleeCombat;
 
-	actorFactory->setup();
+	factory->setup();
 
 	sceneManager.setMeleeCombat(meleeCombat);
 

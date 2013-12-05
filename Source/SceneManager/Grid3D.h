@@ -467,7 +467,10 @@ namespace bammm
 					float distance = getDistance(*unit->getLocation(), *actor->getLocation());
 					if(distance < minDistance && !(unit == actor))
 					{
+<<<<<<< HEAD
 						minDistance = distance;
+=======
+>>>>>>> d0ea96665adee670f7c80aa2ec85c6f475316ea3
 						closest = actor;
 					}
 				}

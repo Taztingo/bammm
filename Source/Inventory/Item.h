@@ -17,6 +17,7 @@
 
 #include <iostream>
 #include "../Resources/Constant.h"
+#include "../Resources/DynamicArray.h"
 //#include "../Interfaces/IAction.h"
 //#include "../Actors/Actor.h"
 using namespace std;
@@ -32,6 +33,7 @@ namespace bammm
 			bool _stackable;
 			//IAction* _action;
 			uint _amount;
+			DynamicArray<Item> _ingredients;
 
 		public:
 			Item();
@@ -131,6 +133,13 @@ namespace bammm
 			 Post-Condition- Returns true if two items have same name
 			 */
 			bool operator==(const Item& item2);
+
+			DynamicArray<Item> getIngredients();
+
+			void setIngredients(DynamicArray<Item> ingredients);
+
+			void addIngredient(Item& ingredient);
+
 
 	};
 }

@@ -37,6 +37,7 @@ namespace bammm
 		_description = "No description";
 		_amount = 1;
 		_stackable = stackable;
+<<<<<<< HEAD
 	}
 
 	Item::Item(string name, string color, bool stackable)
@@ -58,6 +59,34 @@ namespace bammm
 	}
 	
 	Item::Item(string name, int amount, bool stackable)
+=======
+	}
+
+	Item::Item(string name, string color, bool stackable)
+	{
+		_name = name;
+		_color = color;
+		_description = "No description";
+		_amount = 1;
+		_stackable = stackable;
+	}
+
+	Item::Item(string name, int amount, string color, bool stackable)
+	{
+		_name = name;
+		_color = color;
+		_amount = amount;
+		_description = "No description";
+		_stackable = stackable;
+	}
+<<<<<<< HEAD
+
+	Item::Item(string name, int amount)
+=======
+	
+	Item::Item(string name, int amount, bool stackable)
+>>>>>>> refs/heads/master
+>>>>>>> d0ea96665adee670f7c80aa2ec85c6f475316ea3
 	{
 		_name = name;
 		_amount = amount;
@@ -69,10 +98,10 @@ namespace bammm
 	}
 
 	/*void Item::action(Actor* target, int amount)
-	{
-		_action->action(target, amount);
-	}*/
-	
+	 {
+	 _action->action(target, amount);
+	 }*/
+
 	uint Item::getAmount()
 	{
 		return _amount;
@@ -115,7 +144,7 @@ namespace bammm
 
 	bool Item::operator==(const Item& item)
 	{
-		if(_name == item._name)
+		if (_name == item._name)
 		{
 			return true;
 		}
@@ -123,6 +152,26 @@ namespace bammm
 		return false;
 	}
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+	DynamicArray<Item> Item::getIngredients()
+	{
+		return _ingredients;
+	}
+
+	void Item::setIngredients(DynamicArray<Item> ingredients)
+	{
+		_ingredients = ingredients;
+	}
+
+	void Item::addIngredient(Item& ingredient)
+	{
+		_ingredients.add(ingredient);
+	}
+
+=======
+>>>>>>> d0ea96665adee670f7c80aa2ec85c6f475316ea3
 	bool Item::getStackable()
 	{
 		return _stackable;
@@ -139,4 +188,9 @@ namespace bammm
 		newItem->setDescription(_description);
 		return newItem;
 	}
+<<<<<<< HEAD
+=======
+>>>>>>> refs/heads/master
+>>>>>>> d0ea96665adee670f7c80aa2ec85c6f475316ea3
 }
+
