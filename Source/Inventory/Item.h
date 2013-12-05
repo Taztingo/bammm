@@ -17,6 +17,7 @@
 
 #include <iostream>
 #include "../Resources/Constant.h"
+#include "../Resources/DynamicArray.h"
 //#include "../Interfaces/IAction.h"
 //#include "../Actors/Actor.h"
 using namespace std;
@@ -79,11 +80,11 @@ namespace bammm
 			 */
 			bool operator==(const Item& item2);
 
-			DynamicArray<Item>& getIngredients();
+			DynamicArray<Item> getIngredients();
 
-			void setIngredients(DyanmicArray<Item> ingredients);
+			void setIngredients(DynamicArray<Item> ingredients);
 
-			void addIngredient(Item ingredient);
+			void addIngredient(Item& ingredient);
 
 
 	};

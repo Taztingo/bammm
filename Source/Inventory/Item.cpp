@@ -78,17 +78,17 @@ namespace bammm
 		return false;
 	}
 
-	DynamicArray<Item>& Item::getIngredients()
+	DynamicArray<Item> Item::getIngredients()
 	{
-		return &_ingredients;
+		return _ingredients;
 	}
 
-	void Item::setIngredients(DynamicArray<Item>& ingredients)
+	void Item::setIngredients(DynamicArray<Item> ingredients)
 	{
 		_ingredients = ingredients;
 	}
 
-	void Item::addIngredients(Item& ingredient)
+	void Item::addIngredient(Item& ingredient)
 	{
 		_ingredients.add(ingredient);
 	}
