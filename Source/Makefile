@@ -9,7 +9,7 @@ Controllers/AiController.cpp Controllers/Controller.cpp Controllers/PlayerContro
 States/BrawlState.cpp States/DrinkState.cpp States/MoveState.cpp \
 States/IdleState.cpp Interfaces/IStateCallback.cpp States/MineState.cpp States/CombatState.cpp \
 States/SingState.cpp States/SleepState.cpp States/State.cpp States/StateMachine.cpp \
-States/DamageState.cpp States/SearchState.cpp States/ChopState.cpp\
+States/DamageState.cpp States/SearchState.cpp States/CraftState.cpp  States/ChopState.cpp\
 \
 Resources/DynamicArray.h Resources/HashMap.h Resources/HashNode.h \
 Resources/Heap.h Resources/Queue.h Resources/Stack.h Resources/Color.cpp \

@@ -17,15 +17,30 @@
 namespace bammm
 {
 
-	CraftState::CraftState(Actor& actor);
+	CraftState::CraftState(Actor& actor)
+	{
 
-	CraftState::CraftState(Actor& actor, IStateCallback* stateMachine);
+	}
 
-	void CraftState::setup();
+	CraftState::CraftState(Actor& actor, IStateCallback* stateMachine)
+	{
 
-	void CraftState::breakdown();
+	}
 
-	void CraftState::tick();
+	void CraftState::setup()
+	{
+
+	}
+
+	void CraftState::breakdown()
+	{
+
+	}
+
+	void CraftState::tick(float deltaTime)
+	{
+
+	}
 
 	string CraftState::toString()
 	{
