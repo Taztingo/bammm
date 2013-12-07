@@ -1,5 +1,5 @@
 #
-#makefile for Game
+#makefile for BAMMM's Game
 #
 
 RM = rm -f
